@@ -1,0 +1,17 @@
+D:\VSSNEW\MNOWF\MNOWF\VSS\MNOWF\DB\bin\Debug\DB.dll
+D:\VSSNEW\MNOWF\MNOWF\VSS\MNOWF\DB\bin\Debug\DB.pdb
+D:\VSSNEW\MNOWF\MNOWF\VSS\MNOWF\DB\bin\Debug\DB.xml
+D:\VSSNEW\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.vbprojResolveAssemblyReference.cache
+D:\VSSNEW\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.Resources.resources
+D:\VSSNEW\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.vbproj.GenerateResource.Cache
+D:\VSSNEW\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.dll
+D:\VSSNEW\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.xml
+D:\VSSNEW\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.pdb
+D:\VSS\MNOWF\MNOWF\VSS\MNOWF\DB\bin\Debug\DB.dll
+D:\VSS\MNOWF\MNOWF\VSS\MNOWF\DB\bin\Debug\DB.pdb
+D:\VSS\MNOWF\MNOWF\VSS\MNOWF\DB\bin\Debug\DB.xml
+D:\VSS\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.Resources.resources
+D:\VSS\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.vbproj.GenerateResource.Cache
+D:\VSS\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.dll
+D:\VSS\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.xml
+D:\VSS\MNOWF\MNOWF\VSS\MNOWF\DB\obj\Debug\DB.pdb

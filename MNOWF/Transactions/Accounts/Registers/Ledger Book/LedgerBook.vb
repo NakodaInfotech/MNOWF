@@ -1,0 +1,527 @@
+﻿
+Imports BL
+
+Public Class RegisterDetails
+
+    Dim fromD
+    Dim toD
+    Dim a1, a2, a3, a4 As String
+    Dim a11, a12, a13, a14 As String
+
+    Sub getFromToDate()
+        a1 = DatePart(DateInterval.Day, dtfrom.Value.Date)
+        a2 = DatePart(DateInterval.Month, dtfrom.Value.Date)
+        a3 = DatePart(DateInterval.Year, dtfrom.Value.Date)
+        fromD = "(" & a3 & "," & a2 & "," & a1 & ")"
+
+        a11 = DatePart(DateInterval.Day, dtto.Value.Date)
+        a12 = DatePart(DateInterval.Month, dtto.Value.Date)
+        a13 = DatePart(DateInterval.Year, dtto.Value.Date)
+        toD = "(" & a13 & "," & a12 & "," & a11 & ")"
+    End Sub
+
+    Private Sub cmdexit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdexit.Click
+        Me.Close()
+    End Sub
+
+    Private Sub cmdshowdetails_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdshowdetails.Click
+        fillgrid()
+    End Sub
+
+    Sub fillgrid()
+
+        txttotal.Text = "0.00"
+
+        Dim dt As New DataTable()
+        Dim ALPARAVAL As New ArrayList
+
+        Dim objregister As New ClsLedgerBook
+
+        ALPARAVAL.Add(cmbname.Text.Trim)
+        If chkdate.Checked = True Then
+            ALPARAVAL.Add(dtfrom.Value.Date)
+            ALPARAVAL.Add(dtto.Value.Date)
+        Else
+            ALPARAVAL.Add(AccFrom)
+            'COZ DATE WONT BE IN ACCOUNTING YEAR
+            If CmpName = "TRANSFER DATA" Then
+                ALPARAVAL.Add(Now.Date)
+            Else
+                ALPARAVAL.Add(AccTo)
+            End If
+        End If
+
+        ALPARAVAL.Add(CmpId)
+        ALPARAVAL.Add(Locationid)
+        ALPARAVAL.Add(YearId)
+
+        objregister.alParaval = ALPARAVAL
+        If chksubdetails.CheckState = CheckState.Checked Then
+            dt = objregister.GETSUBDETAILS
+        ElseIf chkdetails.Checked = True Then
+            dt = objregister.getDETAILS
+        ElseIf chkdetails.Checked = False Then
+            dt = objregister.getSUMMARY
+        End If
+        griddetails.DataSource = dt
+
+
+        'getting opening balances
+        Dim OBJCOMMON As New ClsCommonMaster
+        If chkdate.CheckState = CheckState.Unchecked Then
+            dt = OBJCOMMON.search(" SUM(DR)-SUM(CR)", "", " Register_Grouped", " and name = '" & cmbname.Text.Trim & "' and acc_billdate <'" & Format(AccFrom, "MM/dd/yyyy") & "' and acc_cmpid = " & CmpId & " and acc_LOCATIONid = " & Locationid & " and YEARID = " & YearId)
+        Else
+            dt = OBJCOMMON.search(" SUM(DR)-SUM(CR)", "", " Register_Grouped", " and name = '" & cmbname.Text.Trim & "' and acc_billdate <'" & Format(dtfrom.Value.Date, "MM/dd/yyyy") & "' and acc_cmpid = " & CmpId & " and acc_LOCATIONid = " & Locationid & " and YEARID = " & YearId)
+        End If
+        If dt.Rows.Count > 0 Then
+            If Val(dt.Rows(0).Item(0).ToString) < 0 Then
+                txtopening.Text = Val(dt.Rows(0).Item(0).ToString) * (-1)
+                lbldrcropening.Text = "Cr"
+            Else
+                txtopening.Text = Val(dt.Rows(0).Item(0).ToString)
+                lbldrcropening.Text = "Dr"
+            End If
+        End If
+
+LINE1:
+        'THIS CODE IS WRITTEN COZ ABOVE CODE DOES NT RETRIEVE OPBAL IF DATE IS FROM 1ST DAY OF ACCOUNTING YEAR
+        'DONT DELETE THIS CODE IT IS CHECKED AND WORKING FINE
+        If Val(txtopening.Text.Trim) = 0 Then
+            dt = OBJCOMMON.search("ACC_OPBAL, ACC_DRCR", "", "LEDGERS", " AND ACC_CMPNAME = '" & cmbname.Text.Trim & "' AND ACC_CMPID = " & CmpId & " AND ACC_LOCATIONID = " & Locationid & " AND ACC_YEARID = " & YearId)
+            If dt.Rows.Count > 0 Then
+                txtopening.Text = Val(dt.Rows(0).Item(0).ToString)
+                If dt.Rows(0).Item(1).ToString = "Dr." Then
+                    lbldrcropening.Text = "Dr"
+                Else
+                    lbldrcropening.Text = "Cr"
+                End If
+            End If
+        End If
+
+        total()
+        txtopening.Text = Format(Val(txtopening.Text), "0.00")
+    End Sub
+
+    Sub total()
+        Try
+            txttotal.Text = 0.0
+            txtdrtotal.Text = 0.0
+            txtcrtotal.Text = 0.0
+
+            txtcrtotal.Text = Format(Val(gcr.SummaryText), "0.00")
+            txtdrtotal.Text = Format(Val(gdr.SummaryText), "0.00")
+
+
+            'FOR RUNNING BALANCE
+            Dim dtrow As DataRow
+            Dim i As Integer
+            Dim RUNNINGBAL As Double
+            If lbldrcropening.Text = "Dr" Then
+                RUNNINGBAL = Val(txtopening.Text)
+            Else
+                RUNNINGBAL = Val(txtopening.Text) * (-1)
+            End If
+
+            For i = 0 To gridregister.RowCount - 1
+                dtrow = gridregister.GetDataRow(i)
+                dtrow("RUNNINGBAL") = (Val(dtrow("Debit")) + Val(RUNNINGBAL)) - Val(dtrow("Credit"))
+                RUNNINGBAL = dtrow("RUNNINGBAL")
+            Next
+
+
+            'Dim dtrow As DataRow
+            'Dim i As Integer
+
+            'For i = 0 To gridregister.RowCount - 1
+            '    dtrow = gridregister.GetDataRow(i)
+            '    txtdrtotal.Text = Format(Val(txtdrtotal.Text) + Val(dtrow(4).ToString), "0.00")
+            '    txtcrtotal.Text = Format(Val(txtcrtotal.Text) + Val(dtrow(5).ToString), "0.00")
+            'Next
+
+            'txttotal.Text = Format(Val(txtdrtotal.Text) - Val(txtcrtotal.Text), "0.00")
+
+            'If chkdate.CheckState = CheckState.Checked Then
+            If lbldrcropening.Text = "Dr" Then
+                txttotal.Text = Format((Val(txtdrtotal.Text) + Val(txtopening.Text)) - Val(txtcrtotal.Text), "0.00")
+            Else
+                txttotal.Text = Format(Val(txtdrtotal.Text) - (Val(txtcrtotal.Text) + Val(txtopening.Text)), "0.00")
+            End If
+            'End If
+
+            'calculating total
+            If Val(txttotal.Text) < 0 Then
+                txttotal.Text = Format(Val(txttotal.Text) * (-1), "0.00")
+                lbldrcrclosing.Text = "Cr"
+            Else
+                lbldrcrclosing.Text = "Dr"
+            End If
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub cmbname_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbname.Enter
+        Try
+            If cmbname.Text.Trim = "" Then fillname(cmbname, False, " and ledgers.acc_cmpid = " & CmpId & " and LEDGERS.acc_LOCATIONid = " & Locationid & " and LEDGERS.ACC_YEARID = " & YearId)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub cmbname_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbname.KeyDown
+        Try
+            If e.KeyCode = Keys.F2 Then
+                Dim OBJLEDGER As New SelectLedger
+                OBJLEDGER.STRSEARCH = " and ledgers.acc_cmpid = " & CmpId & " and LEDGERS.acc_LOCATIONid = " & Locationid & " and LEDGERS.ACC_YEARID = " & YearId
+                OBJLEDGER.ShowDialog()
+                If OBJLEDGER.TEMPCODE <> "" Then CMBACCCODE.Text = OBJLEDGER.TEMPCODE
+                If OBJLEDGER.TEMPNAME <> "" Then cmbname.Text = OBJLEDGER.TEMPNAME
+            End If
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub cmbname_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles cmbname.Validating
+        Try
+            If cmbname.Text.Trim <> "" Then ledgervalidate(cmbname, CMBACCCODE, e, Me, txtadd, " and ledgers.acc_cmpname = '" & cmbname.Text.Trim & "' and acc_cmpid = " & CmpId & " and acc_LOCATIONid = " & Locationid & " and ACC_YEARID = " & YearId)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub RegisterDetails_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+        Try
+            If e.KeyCode = Windows.Forms.Keys.Escape Or (e.KeyCode = Keys.X And e.Alt = True) Then
+                Me.Close()
+            ElseIf e.KeyCode = Keys.S And e.Alt = True Then
+                cmdshowdetails_Click(sender, e)
+            ElseIf e.KeyCode = Keys.O And e.Alt = True Then
+                cmdok_Click(sender, e)
+            ElseIf e.KeyCode = Keys.F3 Then
+                Dim objlb As New LedgerBillwise
+                objlb.cmbname.Text = cmbname.Text.Trim
+                objlb.fillgrid()
+                objlb.MdiParent = MDIMain
+                objlb.Show()
+                Me.Close()
+            ElseIf e.KeyCode = Keys.F4 Then
+                Dim objlb As New LedgerDaily
+                objlb.cmbname.Text = cmbname.Text.Trim
+                objlb.fillgrid()
+                objlb.MdiParent = MDIMain
+                objlb.Show()
+                Me.Close()
+            ElseIf e.KeyCode = Keys.F5 Then
+                Dim objlb As New LedgerMonthly
+                objlb.cmbname.Text = cmbname.Text.Trim
+                objlb.fillgrid()
+                objlb.MdiParent = MDIMain
+                objlb.Show()
+                Me.Close()
+            End If
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub RegisterDetails_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Try
+            'dtfrom.Enabled = False
+            'dtto.Enabled = False
+            'chkdate.Checked = False
+            fillname(cmbname, False, " and ledgers.acc_cmpid = " & CmpId & " and LEDGERS.acc_LOCATIONid = " & Locationid & " and LEDGERS.ACC_YEARID = " & YearId)
+            fillgrid()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub chkdate_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkdate.CheckedChanged
+        Try
+            dtfrom.Enabled = chkdate.CheckState
+            dtto.Enabled = chkdate.CheckState
+            fillgrid()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub chkdetails_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkdetails.CheckedChanged
+        Try
+            fillgrid()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub gridregister_ColumnFilterChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gridregister.ColumnFilterChanged
+        Try
+            total()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub gridregister_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gridregister.DoubleClick
+        Try
+            showform()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub cmdok_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdok.Click
+        Try
+            showform()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Sub showform()
+        Try
+            If gridregister.RowCount > 0 Then
+                Dim dtrow As DataRow = gridregister.GetFocusedDataRow
+                If dtrow("TYPE").ToString = "MEDICAL" Then
+
+                    Dim OBJMED As New MedClaimSettlement
+                    OBJMED.MdiParent = MDIMain
+                    OBJMED.edit = True
+                    OBJMED.TEMPSETTLENO = dtrow("BILL").ToString
+                    OBJMED.TEMPREG = dtrow("REGTYPE").ToString
+                    OBJMED.Show()
+
+                ElseIf dtrow("TYPE").ToString = "EDUCATION" Then
+
+                    Dim OBJEDU As New EduClaimSettlement
+                    OBJEDU.MdiParent = MDIMain
+                    OBJEDU.edit = True
+                    OBJEDU.TEMPSETTLENO = dtrow("BILL").ToString
+                    OBJEDU.TEMPREG = dtrow("REGTYPE").ToString
+                    OBJEDU.Show()
+
+                ElseIf dtrow("TYPE").ToString = "BOOKING" Then
+
+                    Dim OBJBOOK As New Booking
+                    OBJBOOK.MdiParent = MDIMain
+                    OBJBOOK.edit = True
+                    OBJBOOK.TEMPBOOKNO = dtrow("BILL").ToString
+                    OBJBOOK.TEMPREG = dtrow("REGTYPE").ToString
+                    OBJBOOK.Show()
+
+                ElseIf dtrow("TYPE").ToString = "REFUND" Then
+
+                    Dim OBJREF As New Refund
+                    OBJREF.MdiParent = MDIMain
+                    OBJREF.edit = True
+                    OBJREF.TEMPREFUNDNO = dtrow("BILL").ToString
+                    'OBJPURCHASE.TEMPREGNAME = dtrow(7).ToString
+                    OBJREF.Show()
+
+                ElseIf dtrow("TYPE").ToString = "SALARY" Then
+
+                    Dim OBJSAL As New SalaryMaster
+                    OBJSAL.MdiParent = MDIMain
+                    OBJSAL.edit = True
+                    OBJSAL.TEMPSALNO = dtrow("BILL").ToString
+                    'OBJPURCHASE.TEMPREGNAME = dtrow(7).ToString
+                    OBJSAL.Show()
+
+                ElseIf dtrow("TYPE").ToString = "PAYMENT" Then
+
+                    Dim OBJPAYMENT As New PaymentMaster
+                    OBJPAYMENT.MdiParent = MDIMain
+                    OBJPAYMENT.edit = True
+                    OBJPAYMENT.TEMPPAYMENTNO = dtrow("BILL").ToString
+                    OBJPAYMENT.TEMPREGNAME = dtrow("REGTYPE").ToString
+                    OBJPAYMENT.Show()
+
+                ElseIf dtrow("TYPE").ToString = "RECEIPT" Then
+
+                    Dim OBJREC As New Receipt
+                    OBJREC.MdiParent = MDIMain
+                    OBJREC.edit = True
+                    OBJREC.TEMPRECEIPTNO = dtrow("BILL").ToString
+                    OBJREC.TEMPREGNAME = dtrow("REGTYPE").ToString
+                    OBJREC.Show()
+
+                ElseIf dtrow("TYPE").ToString = "JOURNAL" Then
+
+                    Dim OBJJV As New journal
+                    OBJJV.MdiParent = MDIMain
+                    OBJJV.edit = True
+                    OBJJV.tempjvno = dtrow("BILL").ToString
+                    OBJJV.TEMPREGNAME = dtrow("REGTYPE").ToString
+                    OBJJV.Show()
+
+                ElseIf dtrow("TYPE").ToString = "CONTRA" Then
+
+                    Dim OBJCON As New ContraEntry
+                    OBJCON.MdiParent = MDIMain
+                    OBJCON.edit = True
+                    OBJCON.tempcontrano = dtrow("BILL").ToString
+                    OBJCON.TEMPREGNAME = dtrow("REGTYPE").ToString
+                    OBJCON.Show()
+
+                ElseIf dtrow("TYPE").ToString = "EXPENSE" Then
+
+                    Dim OBJEXP As New ExpenseVoucher
+                    OBJEXP.MdiParent = MDIMain
+                    OBJEXP.edit = True
+                    OBJEXP.TEMPEXPNO = dtrow("BILL").ToString
+                    OBJEXP.TEMPREGNAME = dtrow("REGTYPE").ToString
+                    OBJEXP.FRMSTRING = "NONPURCHASE"
+                    OBJEXP.Show()
+
+                End If
+            End If
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub PrintToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PrintToolStripButton.Click
+
+        Try
+            Dim objreg As New registerdesign
+            Dim tempmsg As Integer = vbNo
+            If tempmsg = vbYes Then
+                objreg.frmstring = "LedgerBookConfirm"
+            Else
+                If chkdetails.Checked = False Then
+                    objreg.frmstring = "LedgerBook"
+                Else
+                    objreg.frmstring = "LedgerBookDetails"
+                End If
+            End If
+
+
+            objreg.strsearch = "{LEDGERBOOK.Name} = '" & cmbname.Text.Trim & "' AND {LEDGERBOOK.ACC_Type} <> 'OPENING' AND {LEDGERBOOK.Yearid} = " & YearId
+            getFromToDate()
+
+            objreg.OPENING = Format(Val(txtopening.Text), "0.00")
+            objreg.CLOSINGAMT = Format(Val(txttotal.Text), "0.00")
+            objreg.DRTOTAL = Format(Val(txtdrtotal.Text), "0.00")
+            objreg.CRTOTAL = Format(Val(txtcrtotal.Text), "0.00")
+            objreg.crdr = lbldrcropening.Text
+            objreg.CLOSINGDRCR = lbldrcrclosing.Text
+
+            If chkdate.Checked = True Then
+
+                objreg.FROMDATE = dtfrom.Value.Date
+                objreg.TODATE = dtto.Value.Date
+                objreg.PERIOD = cmbname.Text.Trim & " - (" & Format(dtfrom.Value.Date, "dd/MM/yyyy") & " - " & Format(dtto.Value.Date, "dd/MM/yyyy") & ")"
+            Else
+                objreg.FROMDATE = AccFrom
+                objreg.TODATE = AccTo
+                objreg.PERIOD = cmbname.Text.Trim & " - (" & Format(AccFrom.Date, "dd/MM/yyyy") & " - " & Format(AccTo.Date, "dd/MM/yyyy") & ")"
+            End If
+            objreg.PARTYNAME = cmbname.Text.Trim
+            objreg.MdiParent = MDIMain
+            objreg.Show()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub chksubdetails_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chksubdetails.CheckedChanged
+        Try
+            fillgrid()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub ExcelExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExcelExport.Click
+        Try
+            Dim PATH As String
+            If FileIO.FileSystem.FileExists(PATH) = True Then FileIO.FileSystem.DeleteFile(PATH)
+            If chkdetails.Checked = True Then
+                PATH = Application.StartupPath & "\" & cmbname.Text.Trim & " Ledger.XLS"
+            ElseIf chksubdetails.Checked = True Then
+                PATH = Application.StartupPath & "\" & cmbname.Text.Trim & " Ledger.XLS"
+            Else
+                PATH = Application.StartupPath & "\" & cmbname.Text.Trim & " Ledger.XLS"
+            End If
+            Dim opti As New DevExpress.XtraPrinting.XlsExportOptions
+            opti.ShowGridLines = True
+            For Each proc In System.Diagnostics.Process.GetProcessesByName("Excel")
+                proc.Kill()
+            Next
+
+            Dim PERIOD As String = ""
+            If chkdate.Checked = False Then
+                PERIOD = AccFrom & " - " & AccTo
+            Else
+                PERIOD = dtfrom.Value.Date & " - " & dtto.Value.Date
+            End If
+
+            If chkdetails.Checked = True Then
+                opti.SheetName = "" & cmbname.Text.Trim & " Ledger"
+                griddetails.ExportToXls(PATH, opti)
+                EXCELCMPHEADER(PATH, "" & cmbname.Text.Trim & " Ledger", gridregister.VisibleColumns.Count + gridregister.GroupCount, cmbname.Text.Trim, PERIOD, Val(txtopening.Text.Trim) & " " & lbldrcropening.Text.Trim, Val(txttotal.Text.Trim) & " " & lbldrcrclosing.Text)
+
+            ElseIf chksubdetails.Checked = True Then
+                opti.SheetName = "" & cmbname.Text.Trim & " Ledger"
+                griddetails.ExportToXls(PATH, opti)
+                EXCELCMPHEADER(PATH, "" & cmbname.Text.Trim & " Ledger", gridregister.VisibleColumns.Count + gridregister.GroupCount, cmbname.Text.Trim, PERIOD, Val(txtopening.Text.Trim) & " " & lbldrcropening.Text.Trim, Val(txttotal.Text.Trim) & " " & lbldrcrclosing.Text)
+            Else
+                opti.SheetName = "" & cmbname.Text.Trim & " Ledger"
+                griddetails.ExportToXls(PATH, opti)
+                EXCELCMPHEADER(PATH, "" & cmbname.Text.Trim & " Ledger", gridregister.VisibleColumns.Count + gridregister.GroupCount, cmbname.Text.Trim, PERIOD, Val(txtopening.Text.Trim) & " " & lbldrcropening.Text.Trim, Val(txttotal.Text.Trim) & " " & lbldrcrclosing.Text)
+            End If
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub TOOLBILL_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TOOLBILL.Click
+        Try
+            Dim objlb As New LedgerBillwise
+            objlb.cmbname.Text = cmbname.Text.Trim
+            objlb.fillgrid()
+            objlb.MdiParent = MDIMain
+            objlb.Show()
+            Me.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub TOOLDAILY_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TOOLDAILY.Click
+        Try
+            Dim objlb As New LedgerDaily
+            objlb.cmbname.Text = cmbname.Text.Trim
+            objlb.fillgrid()
+            objlb.MdiParent = MDIMain
+            objlb.Show()
+            Me.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub TOOLMONTHLY_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TOOLMONTHLY.Click
+        Try
+            Dim objlb As New LedgerMonthly
+            objlb.cmbname.Text = cmbname.Text.Trim
+            objlb.fillgrid()
+            objlb.MdiParent = MDIMain
+            objlb.Show()
+            Me.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub griddetails_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles griddetails.KeyDown
+        Try
+            If e.KeyCode = Keys.Enter Then Call cmdok_Click(sender, e)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+End Class

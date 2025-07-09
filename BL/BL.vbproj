@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BFFCFFC5-AB1D-404B-9E28-2484DD9E0856}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BL</RootNamespace>
+    <AssemblyName>BL</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>BL.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>BL.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.Excel, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\dlls\Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Net" />
+    <Import Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ClsCommon.vb" />
+    <Compile Include="Common\ClsCommonMaster.vb" />
+    <Compile Include="Common\ClsEmailMaster.vb" />
+    <Compile Include="Common\ClsLogin.vb" />
+    <Compile Include="Common\ClsProgressBar.vb" />
+    <Compile Include="Common\ClsReportDesigner.vb" />
+    <Compile Include="Masters\ClsAccountsMaster.vb" />
+    <Compile Include="Masters\ClsAmenitiesMaster.vb" />
+    <Compile Include="Masters\ClsAreaMaster.vb" />
+    <Compile Include="Masters\ClsBookedByMaster.vb" />
+    <Compile Include="Masters\ClsCategoryConfig.vb" />
+    <Compile Include="Masters\ClsCategoryMaster.vb" />
+    <Compile Include="Masters\ClsChargesMaster.vb" />
+    <Compile Include="Masters\ClsCityMaster.vb" />
+    <Compile Include="Masters\ClsCompanyMaster.vb" />
+    <Compile Include="Masters\ClsCountryMaster.vb" />
+    <Compile Include="Masters\ClsCourseMaster.vb" />
+    <Compile Include="Masters\ClsCourseYearMaster.vb" />
+    <Compile Include="Masters\ClsDeducteetypeMaster.vb" />
+    <Compile Include="Masters\ClsDepartmentMaster.vb" />
+    <Compile Include="Masters\ClsDesignationMaster.vb" />
+    <Compile Include="Masters\ClsDocTypeMaster.vb" />
+    <Compile Include="Masters\ClsEmployeeMaster.vb" />
+    <Compile Include="Masters\ClsFamilyMaster.vb" />
+    <Compile Include="Masters\ClsGroupMaster.vb" />
+    <Compile Include="Masters\ClsGroupOfHotelsMaster.vb" />
+    <Compile Include="Masters\ClsHolidayMaster.vb" />
+    <Compile Include="Masters\ClsHotelMaster.vb" />
+    <Compile Include="Masters\ClsHotelTypeMaster.vb" />
+    <Compile Include="Masters\ClsInModeMaster.vb" />
+    <Compile Include="Masters\ClsItemCategory.vb" />
+    <Compile Include="Masters\ClsItemMaster.vb" />
+    <Compile Include="Masters\ClsNarrationMaster.vb" />
+    <Compile Include="Masters\ClsNatureOfPayment.vb" />
+    <Compile Include="Masters\ClsOfficerMaster.vb" />
+    <Compile Include="Masters\ClsRankMaster.vb" />
+    <Compile Include="Masters\ClsRegisterMaster.vb" />
+    <Compile Include="Masters\ClsRelationMaster.vb" />
+    <Compile Include="Masters\ClsRoomTypeMaster.vb" />
+    <Compile Include="Masters\ClsSentByMaster.vb" />
+    <Compile Include="Masters\ClsSourceMaster.vb" />
+    <Compile Include="Masters\ClsStateMaster.vb" />
+    <Compile Include="Masters\ClsTaxMaster.vb" />
+    <Compile Include="Masters\ClsUnitMaster.vb" />
+    <Compile Include="Masters\ClsUserMaster.vb" />
+    <Compile Include="Masters\ClsVesselMaster.vb" />
+    <Compile Include="Masters\ClsYearMaster.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Transactions\Accounts\Balance Sheet\ClsBalanceSheet.vb" />
+    <Compile Include="Transactions\Accounts\Bank Reco\ClsBankReco.vb" />
+    <Compile Include="Transactions\Accounts\Contra\ClsContra.vb" />
+    <Compile Include="Transactions\Accounts\Expense Voucher\ClsExpenseVoucher.vb" />
+    <Compile Include="Transactions\Accounts\Journal\ClsJournalMaster.vb" />
+    <Compile Include="Transactions\Accounts\Opening\ClsOpening.vb" />
+    <Compile Include="Transactions\Accounts\Payment\ClsPaymentMaster.vb" />
+    <Compile Include="Transactions\Accounts\Profit&amp;Loss\ClsProfitLoss.vb" />
+    <Compile Include="Transactions\Accounts\Receipt\ClsReceiptMaster.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Bank Register\ClsBankRegister.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Cash Register\ClsCashRegister.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Contra Register\ClsContraRegister.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Day Book\ClsDayBook.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Group Trans Register\ClsGroupRegister.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Journal Register\ClsJournalRegister.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Ledger Book\ClsLedgerBook.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Purchase Register\ClsPurchaseRegister.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Sale Register\ClsSaleRegister.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Tax Register\ClsPurchaseTaxRegister.vb" />
+    <Compile Include="Transactions\Accounts\Registers\Tax Register\ClsSalesTaxRegister.vb" />
+    <Compile Include="Transactions\Accounts\Salary Slip\ClsSalaryMaster.vb" />
+    <Compile Include="Transactions\Accounts\TDS\ClsTDSCertificate.vb" />
+    <Compile Include="Transactions\Accounts\TDS\ClsTDSChallan.vb" />
+    <Compile Include="Transactions\Accounts\Trial Balance\ClsTrialBalance.vb" />
+    <Compile Include="Transactions\Bookings\ClsBooking.vb" />
+    <Compile Include="Transactions\Bookings\ClsRefund.vb" />
+    <Compile Include="Transactions\Claim\ClsCorrespondence.vb" />
+    <Compile Include="Transactions\Claim\Education Claim\ClsEduClaimReq.vb" />
+    <Compile Include="Transactions\Claim\Education Claim\ClsEduClaimSettlement.vb" />
+    <Compile Include="Transactions\Claim\Medical Claim\ClsMedClaimReq.vb" />
+    <Compile Include="Transactions\Claim\Medical Claim\ClsMedClaimSettlement.vb" />
+    <Compile Include="Transactions\Document\ClsDocumentOutward.vb" />
+    <Compile Include="Transactions\Document\ClsDocumentInward.vb" />
+    <Compile Include="Transactions\Inventory\ClsItemInventory.vb" />
+    <Compile Include="Transactions\Investment\ClsInvestmentMaster.vb" />
+    <Compile Include="Utilities\ClsAttendence.vb" />
+    <Compile Include="Utilities\ClsMergeLedger.vb" />
+    <Compile Include="Utilities\ClsyYearTransfer.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DB\DB.vbproj">
+      <Project>{825823E8-B75C-4A06-9008-D1E5AE03F28A}</Project>
+      <Name>DB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
