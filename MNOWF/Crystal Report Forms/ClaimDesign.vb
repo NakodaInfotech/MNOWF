@@ -259,6 +259,21 @@ Public Class ClaimDesign
                 expo.ExportFormatType = ExportFormatType.PortableDocFormat
                 expo.DestinationOptions = oDfDopt
                 RPTEDU.Export()
+            ElseIf FRMSTRING = "BANKPAYMENTREGISTER" Then
+                oDfDopt.DiskFileName = Application.StartupPath & "\Claim Bank Payment Register.xls"
+                expo = RPTBANKPAYDTLS.ExportOptions
+                expo.ExportDestinationType = ExportDestinationType.DiskFile
+                expo.ExportFormatType = ExportFormatType.Excel  ' <--- NOT ExcelRecord!
+
+                Dim excelOptions As New ExcelFormatOptions
+                excelOptions.ExcelUseConstantColumnWidth = True
+                excelOptions.ShowGridLines = True
+                excelOptions.ExcelTabHasColumnHeadings = True
+                expo.ExportFormatOptions = excelOptions
+
+                expo.DestinationOptions = oDfDopt
+                RPTBANKPAYDTLS.Export()
+
             ElseIf FRMSTRING = "PAYMENTREGISTER" Then
                 oDfDopt.DiskFileName = Application.StartupPath & "\Claim Payment Register.PDF"
                 expo = RPTPAYDTLS.ExportOptions
@@ -285,78 +300,5 @@ Public Class ClaimDesign
             MessageBox.Show(ex.ToString)
         End Try
     End Sub
-    'Sub PRINTDIRECTADVICE()
-    '    Try
-    '        Dim crParameterFieldDefinitions As ParameterFieldDefinitions
-    '        Dim crParameterFieldDefinition As ParameterFieldDefinition
-    '        Dim crParameterValues As New ParameterValues
-    '        Dim crParameterDiscreteValue As New ParameterDiscreteValue
 
-    '        '**************** SET SERVER ************************
-    '        Dim crtableLogonInfo As New TableLogOnInfo
-    '        Dim crConnecttionInfo As New ConnectionInfo
-    '        Dim crTables As Tables
-    '        Dim crTable As Table
-
-
-    '        With crConnecttionInfo
-    '            .ServerName = SERVERNAME
-    '            .DatabaseName = DatabaseName
-    '            .UserID = DBUSERNAME
-    '            .Password = Dbpassword
-    '            .IntegratedSecurity = Dbsecurity
-    '        End With
-
-
-    '        Dim OBJ As New Object
-
-
-
-    '        If FRMSTRING = "ACKNOWLEDGEMENT" Then
-    '            OBJ = New RefundPayReport
-    '        Else
-    '            OBJ = New AllotmentLetter
-    '        End If
-
-
-    '        crTables = OBJ.Database.Tables
-
-    '        For Each crTable In crTables
-    '            crtableLogonInfo = crTable.LogOnInfo
-    '            crtableLogonInfo.ConnectionInfo = crConnecttionInfo
-    '            crTable.ApplyLogOnInfo(crtableLogonInfo)
-    '        Next
-
-
-    '        OBJ.RecordSelectionFormula = FORMULA
-
-    '        If DIRECTMAIL = False And DIRECTWHATSAPP = False Then
-    '            OBJ.PrintOptions.PrinterName = PRINTSETTING.PrinterSettings.PrinterName
-    '            OBJ.PrintToPrinter(Val(NOOFCOPIES), True, 0, 0)
-    '        Else
-    '            Dim expo As New ExportOptions
-    '            Dim oDfDopt As New DiskFileDestinationOptions
-
-
-    '            If FRMSTRING = "ACKNOWLEDGEMENT" Then
-    '                TEMPATTACHMENT = "REFUND_" & SETTLENO
-    '            Else
-    '                TEMPATTACHMENT = "ALLOTMENTLETTER_" & SETTLENO
-    '            End If
-
-    '            oDfDopt.DiskFileName = Application.StartupPath & "\" & TEMPATTACHMENT & ".pdf"
-
-    '            'CHECK WHETHER FILE IS PRESENT OR NOT, IF PRESENT THEN DELETE FIRST AND THEN EXPORT
-    '            If File.Exists(oDfDopt.DiskFileName) Then File.Delete(oDfDopt.DiskFileName)
-    '            expo = OBJ.ExportOptions
-    '            expo.ExportDestinationType = ExportDestinationType.DiskFile
-    '            expo.ExportFormatType = ExportFormatType.PortableDocFormat
-    '            expo.DestinationOptions = oDfDopt
-    '            OBJ.Export()
-
-    '        End If
-    '    Catch ex As Exception
-    '        Throw ex
-    '    End Try
-    'End Sub
 End Class
