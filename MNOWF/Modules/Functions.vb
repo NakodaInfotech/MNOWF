@@ -1,4 +1,4 @@
-
+﻿
 Imports System.Windows.Forms
 Imports System.Net.Mail
 Imports BL
@@ -8,6 +8,9 @@ Imports Newtonsoft.Json
 Imports System.Web
 Imports System.Security
 Imports WAProAPI
+Imports Microsoft.Office.Interop.Excel
+Imports Microsoft.Office.Core
+Imports Microsoft.Office.Interop
 
 Module Functions
 
@@ -61,6 +64,96 @@ Module Functions
             Throw ex
         End Try
     End Function
+
+#Region "DEFAULT HEADER"
+
+
+    Public Sub AddExcelHeaderWithLogo(filePath As String, reportType As String, dtfrom As Date, dtto As Date)
+        Dim excelApp As New Excel.Application
+        Dim workbook As Excel.Workbook = excelApp.Workbooks.Open(filePath)
+        Dim worksheet As Excel.Worksheet = CType(workbook.Sheets(1), Excel.Worksheet)
+
+        excelApp.Visible = False
+
+        ' Insert 5 rows at the top
+        worksheet.Rows("1:5").Insert()
+
+        ' Set default font
+        worksheet.Cells.Font.Name = "Calibri"
+        worksheet.Cells.Font.Size = 10
+
+        ' Main Title
+        With worksheet.Range("A1:H1")
+            .Merge()
+            .Value = "THE MERCHANT NAVY OFFICERS' WELFARE FUND"
+            .Font.Size = 14
+            .Font.Bold = True
+            .HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
+        End With
+
+        ' Subtitle
+        With worksheet.Range("A2:H2")
+            .Merge()
+            .Value = reportType.ToUpper() & " REIMBURSEMENT PAYMENT (BANK COPY)"
+            .Font.Size = 11
+            .Font.Bold = True
+            .Font.Underline = True
+            .HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
+        End With
+
+        ' Date Range
+        With worksheet.Range("A3:H3")
+            .Merge()
+            .Value = "From " & dtfrom.ToString("dd/MM/yyyy") & " To " & dtto.ToString("dd/MM/yyyy")
+            .Font.Size = 10
+            .HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
+        End With
+
+        ' Insert Logo if it exists
+        Dim logoPath As String = Application.StartupPath & "\logo.png"
+        If System.IO.File.Exists(logoPath) Then
+            worksheet.Shapes.AddPicture(logoPath, 0, -1, 10, 5, 60, 60)
+        Else
+            MsgBox("Logo not found at: " & logoPath)
+        End If
+
+        ' Determine the last used row
+        Dim lastRow As Integer = worksheet.Cells(worksheet.Rows.Count, 1).End(Excel.XlDirection.xlUp).Row
+
+        ' Auto-fit all columns
+        worksheet.Columns("A:H").AutoFit()
+
+        ' Freeze header row (row 6 becomes header after inserting 5 rows)
+        worksheet.Rows("7:7").Select()
+        excelApp.ActiveWindow.FreezePanes = True
+
+        ' Align Amount column (G) to the right
+        worksheet.Range("G7:G" & lastRow).HorizontalAlignment = Excel.XlHAlign.xlHAlignRight
+
+        ' Save and clean up
+        workbook.Save()
+        workbook.Close(False)
+        excelApp.Quit()
+
+        ' Release COM objects
+        ReleaseObject(worksheet)
+        ReleaseObject(workbook)
+        ReleaseObject(excelApp)
+    End Sub
+
+    Private Sub ReleaseObject(ByVal obj As Object)
+        Try
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(obj)
+            obj = Nothing
+        Catch ex As Exception
+            obj = Nothing
+        Finally
+            GC.Collect()
+        End Try
+    End Sub
+
+
+#End Region
 
 #Region "WHATSAPP"
 

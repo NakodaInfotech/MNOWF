@@ -1,12 +1,53 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\GIT\\MNOWF\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E9E77BA5-0932-4158-B5EB-C411F2C0114E}|MNOWF\\MNOWF.vbproj|d:\\git\\mnowf\\mnowf\\reports\\grid reports\\claimpaymentregister.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{E9E77BA5-0932-4158-B5EB-C411F2C0114E}|MNOWF\\MNOWF.vbproj|solutionrelative:mnowf\\reports\\grid reports\\claimpaymentregister.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9E77BA5-0932-4158-B5EB-C411F2C0114E}|MNOWF\\MNOWF.vbproj|d:\\git\\mnowf\\mnowf\\reports\\grid reports\\claimpaymentregister.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{E9E77BA5-0932-4158-B5EB-C411F2C0114E}|MNOWF\\MNOWF.vbproj|solutionrelative:mnowf\\reports\\grid reports\\claimpaymentregister.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClaimPaymentRegister.vb",
+              "DocumentMoniker": "D:\\GIT\\MNOWF\\MNOWF\\Reports\\Grid Reports\\ClaimPaymentRegister.vb",
+              "RelativeDocumentMoniker": "MNOWF\\Reports\\Grid Reports\\ClaimPaymentRegister.vb",
+              "ToolTip": "D:\\GIT\\MNOWF\\MNOWF\\Reports\\Grid Reports\\ClaimPaymentRegister.vb",
+              "RelativeToolTip": "MNOWF\\Reports\\Grid Reports\\ClaimPaymentRegister.vb",
+              "ViewState": "AgIAACYAAAAAAAAAAAApwDIAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-07-31T06:36:13.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClaimPaymentRegister.vb [Design]",
+              "DocumentMoniker": "D:\\GIT\\MNOWF\\MNOWF\\Reports\\Grid Reports\\ClaimPaymentRegister.vb",
+              "RelativeDocumentMoniker": "MNOWF\\Reports\\Grid Reports\\ClaimPaymentRegister.vb",
+              "ToolTip": "D:\\GIT\\MNOWF\\MNOWF\\Reports\\Grid Reports\\ClaimPaymentRegister.vb [Design]",
+              "RelativeToolTip": "MNOWF\\Reports\\Grid Reports\\ClaimPaymentRegister.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-07-31T06:17:12.961Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -24,14 +24,8 @@ Partial Class ClaimPaymentRegister
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ClaimPaymentRegister))
         Me.BlendPanel1 = New VbPowerPack.BlendPanel()
-        Me.CMBTYPE = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.cmdshowdetails = New System.Windows.Forms.Button()
-        Me.chkdate = New System.Windows.Forms.CheckBox()
-        Me.dtto = New System.Windows.Forms.DateTimePicker()
-        Me.lblto = New System.Windows.Forms.Label()
-        Me.dtfrom = New System.Windows.Forms.DateTimePicker()
-        Me.lblfrom = New System.Windows.Forms.Label()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TBREPORT = New System.Windows.Forms.TabPage()
         Me.gridbilldetails = New DevExpress.XtraGrid.GridControl()
         Me.gridbill = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GTYPE = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -60,6 +54,27 @@ Partial Class ClaimPaymentRegister
         Me.CHKCLOSED = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.CMDOK = New System.Windows.Forms.Button()
         Me.cmdcancel = New System.Windows.Forms.Button()
+        Me.TBFILTERS = New System.Windows.Forms.TabPage()
+        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GSRNO = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GSENDERACNO = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GBENIFICIARYCHQNO = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GBENIFICIARYCHQDATE = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GBENIFICIARYACNO = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GIFSCCODE = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GAMOUNT = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GBENIFICIARYNAME = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.CMBTYPE = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cmdshowdetails = New System.Windows.Forms.Button()
+        Me.chkdate = New System.Windows.Forms.CheckBox()
+        Me.dtto = New System.Windows.Forms.DateTimePicker()
+        Me.lblto = New System.Windows.Forms.Label()
+        Me.dtfrom = New System.Windows.Forms.DateTimePicker()
+        Me.lblfrom = New System.Windows.Forms.Label()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ExcelExport = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -67,16 +82,24 @@ Partial Class ClaimPaymentRegister
         Me.PrintToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.BlendPanel1.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TBREPORT.SuspendLayout()
         CType(Me.gridbilldetails, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridbill, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CHKSETTLED, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CHKCLOSED, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TBFILTERS.SuspendLayout()
+        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'BlendPanel1
         '
         Me.BlendPanel1.Blend = New VbPowerPack.BlendFill(VbPowerPack.BlendStyle.Vertical, System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(248, Byte), Integer)), System.Drawing.SystemColors.Window)
+        Me.BlendPanel1.Controls.Add(Me.TabControl1)
         Me.BlendPanel1.Controls.Add(Me.CMBTYPE)
         Me.BlendPanel1.Controls.Add(Me.Label6)
         Me.BlendPanel1.Controls.Add(Me.cmdshowdetails)
@@ -85,121 +108,47 @@ Partial Class ClaimPaymentRegister
         Me.BlendPanel1.Controls.Add(Me.lblto)
         Me.BlendPanel1.Controls.Add(Me.dtfrom)
         Me.BlendPanel1.Controls.Add(Me.lblfrom)
-        Me.BlendPanel1.Controls.Add(Me.gridbilldetails)
-        Me.BlendPanel1.Controls.Add(Me.CMDOK)
-        Me.BlendPanel1.Controls.Add(Me.cmdcancel)
         Me.BlendPanel1.Controls.Add(Me.ToolStrip1)
         Me.BlendPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BlendPanel1.Location = New System.Drawing.Point(0, 0)
         Me.BlendPanel1.Name = "BlendPanel1"
-        Me.BlendPanel1.Size = New System.Drawing.Size(1234, 741)
+        Me.BlendPanel1.Size = New System.Drawing.Size(1234, 619)
         Me.BlendPanel1.TabIndex = 4
         '
-        'CMBTYPE
+        'TabControl1
         '
-        Me.CMBTYPE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.CMBTYPE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.CMBTYPE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMBTYPE.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CMBTYPE.FormattingEnabled = True
-        Me.CMBTYPE.Items.AddRange(New Object() {"", "EDUCATION", "MEDICAL"})
-        Me.CMBTYPE.Location = New System.Drawing.Point(54, 35)
-        Me.CMBTYPE.MaxDropDownItems = 14
-        Me.CMBTYPE.Name = "CMBTYPE"
-        Me.CMBTYPE.Size = New System.Drawing.Size(123, 22)
-        Me.CMBTYPE.TabIndex = 638
+        Me.TabControl1.Controls.Add(Me.TBREPORT)
+        Me.TabControl1.Controls.Add(Me.TBFILTERS)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 81)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(1210, 526)
+        Me.TabControl1.TabIndex = 640
         '
-        'Label6
+        'TBREPORT
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(20, 39)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(31, 14)
-        Me.Label6.TabIndex = 639
-        Me.Label6.Text = "Type"
-        '
-        'cmdshowdetails
-        '
-        Me.cmdshowdetails.BackColor = System.Drawing.Color.Transparent
-        Me.cmdshowdetails.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.cmdshowdetails.FlatAppearance.BorderSize = 0
-        Me.cmdshowdetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmdshowdetails.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdshowdetails.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.cmdshowdetails.Image = Global.MNOWF.My.Resources.Resources.showdetails2
-        Me.cmdshowdetails.Location = New System.Drawing.Point(467, 34)
-        Me.cmdshowdetails.Name = "cmdshowdetails"
-        Me.cmdshowdetails.Size = New System.Drawing.Size(83, 25)
-        Me.cmdshowdetails.TabIndex = 636
-        Me.cmdshowdetails.UseVisualStyleBackColor = False
-        '
-        'chkdate
-        '
-        Me.chkdate.AutoSize = True
-        Me.chkdate.BackColor = System.Drawing.Color.Transparent
-        Me.chkdate.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkdate.Location = New System.Drawing.Point(183, 37)
-        Me.chkdate.Name = "chkdate"
-        Me.chkdate.Size = New System.Drawing.Size(52, 18)
-        Me.chkdate.TabIndex = 632
-        Me.chkdate.Text = "Date"
-        Me.chkdate.UseVisualStyleBackColor = False
-        '
-        'dtto
-        '
-        Me.dtto.CustomFormat = "dd/MM/yyyy"
-        Me.dtto.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtto.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtto.Location = New System.Drawing.Point(382, 35)
-        Me.dtto.Name = "dtto"
-        Me.dtto.Size = New System.Drawing.Size(79, 22)
-        Me.dtto.TabIndex = 635
-        '
-        'lblto
-        '
-        Me.lblto.AutoSize = True
-        Me.lblto.BackColor = System.Drawing.Color.Transparent
-        Me.lblto.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblto.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.lblto.Location = New System.Drawing.Point(358, 39)
-        Me.lblto.Name = "lblto"
-        Me.lblto.Size = New System.Drawing.Size(19, 14)
-        Me.lblto.TabIndex = 637
-        Me.lblto.Text = "To"
-        '
-        'dtfrom
-        '
-        Me.dtfrom.CustomFormat = "dd/MM/yyyy"
-        Me.dtfrom.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtfrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtfrom.Location = New System.Drawing.Point(273, 35)
-        Me.dtfrom.Name = "dtfrom"
-        Me.dtfrom.Size = New System.Drawing.Size(80, 22)
-        Me.dtfrom.TabIndex = 634
-        '
-        'lblfrom
-        '
-        Me.lblfrom.AutoSize = True
-        Me.lblfrom.BackColor = System.Drawing.Color.Transparent
-        Me.lblfrom.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblfrom.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.lblfrom.Location = New System.Drawing.Point(235, 39)
-        Me.lblfrom.Name = "lblfrom"
-        Me.lblfrom.Size = New System.Drawing.Size(34, 14)
-        Me.lblfrom.TabIndex = 633
-        Me.lblfrom.Text = "From"
+        Me.TBREPORT.AutoScroll = True
+        Me.TBREPORT.BackColor = System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.TBREPORT.Controls.Add(Me.gridbilldetails)
+        Me.TBREPORT.Controls.Add(Me.CMDOK)
+        Me.TBREPORT.Controls.Add(Me.cmdcancel)
+        Me.TBREPORT.Font = New System.Drawing.Font("Verdana", 7.0!)
+        Me.TBREPORT.Location = New System.Drawing.Point(4, 23)
+        Me.TBREPORT.Name = "TBREPORT"
+        Me.TBREPORT.Padding = New System.Windows.Forms.Padding(3)
+        Me.TBREPORT.Size = New System.Drawing.Size(1202, 499)
+        Me.TBREPORT.TabIndex = 0
+        Me.TBREPORT.Text = "Report"
         '
         'gridbilldetails
         '
         Me.gridbilldetails.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gridbilldetails.Location = New System.Drawing.Point(14, 66)
+        Me.gridbilldetails.Location = New System.Drawing.Point(6, 6)
         Me.gridbilldetails.LookAndFeel.UseDefaultLookAndFeel = False
         Me.gridbilldetails.MainView = Me.gridbill
         Me.gridbilldetails.Name = "gridbilldetails"
         Me.gridbilldetails.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.CHKSETTLED, Me.CHKCLOSED})
-        Me.gridbilldetails.Size = New System.Drawing.Size(1208, 631)
+        Me.gridbilldetails.Size = New System.Drawing.Size(1207, 428)
         Me.gridbilldetails.TabIndex = 442
         Me.gridbilldetails.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gridbill})
         '
@@ -458,7 +407,7 @@ Partial Class ClaimPaymentRegister
         Me.CMDOK.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDOK.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.CMDOK.Image = Global.MNOWF.My.Resources.Resources.ok
-        Me.CMDOK.Location = New System.Drawing.Point(429, 703)
+        Me.CMDOK.Location = New System.Drawing.Point(417, 440)
         Me.CMDOK.Name = "CMDOK"
         Me.CMDOK.Size = New System.Drawing.Size(72, 26)
         Me.CMDOK.TabIndex = 323
@@ -473,11 +422,245 @@ Partial Class ClaimPaymentRegister
         Me.cmdcancel.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdcancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.cmdcancel.Image = Global.MNOWF.My.Resources.Resources._Exit
-        Me.cmdcancel.Location = New System.Drawing.Point(507, 705)
+        Me.cmdcancel.Location = New System.Drawing.Point(495, 442)
         Me.cmdcancel.Name = "cmdcancel"
         Me.cmdcancel.Size = New System.Drawing.Size(72, 24)
         Me.cmdcancel.TabIndex = 322
         Me.cmdcancel.UseVisualStyleBackColor = False
+        '
+        'TBFILTERS
+        '
+        Me.TBFILTERS.BackColor = System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.TBFILTERS.Controls.Add(Me.GridControl1)
+        Me.TBFILTERS.Location = New System.Drawing.Point(4, 23)
+        Me.TBFILTERS.Name = "TBFILTERS"
+        Me.TBFILTERS.Padding = New System.Windows.Forms.Padding(3)
+        Me.TBFILTERS.Size = New System.Drawing.Size(1202, 499)
+        Me.TBFILTERS.TabIndex = 1
+        Me.TBFILTERS.Text = "Excel Layout"
+        '
+        'GridControl1
+        '
+        Me.GridControl1.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridControl1.Location = New System.Drawing.Point(7, 6)
+        Me.GridControl1.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.GridControl1.MainView = Me.GridView1
+        Me.GridControl1.Name = "GridControl1"
+        Me.GridControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemCheckEdit2})
+        Me.GridControl1.Size = New System.Drawing.Size(1208, 428)
+        Me.GridControl1.TabIndex = 443
+        Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
+        '
+        'GridView1
+        '
+        Me.GridView1.Appearance.Row.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridView1.Appearance.Row.Options.UseFont = True
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GSRNO, Me.GSENDERACNO, Me.GBENIFICIARYCHQNO, Me.GBENIFICIARYCHQDATE, Me.GBENIFICIARYACNO, Me.GIFSCCODE, Me.GAMOUNT, Me.GBENIFICIARYNAME})
+        Me.GridView1.GridControl = Me.GridControl1
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsBehavior.AllowIncrementalSearch = True
+        Me.GridView1.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GridView1.OptionsBehavior.Editable = False
+        Me.GridView1.OptionsView.AllowCellMerge = True
+        Me.GridView1.OptionsView.ColumnAutoWidth = False
+        Me.GridView1.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
+        Me.GridView1.OptionsView.ShowAutoFilterRow = True
+        Me.GridView1.OptionsView.ShowFooter = True
+        '
+        'GSRNO
+        '
+        Me.GSRNO.Caption = "SR NO"
+        Me.GSRNO.FieldName = "SRNO"
+        Me.GSRNO.Name = "GSRNO"
+        Me.GSRNO.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GSRNO.OptionsColumn.ReadOnly = True
+        Me.GSRNO.UnboundType = DevExpress.Data.UnboundColumnType.[Integer]
+        Me.GSRNO.Visible = True
+        Me.GSRNO.VisibleIndex = 0
+        '
+        'GSENDERACNO
+        '
+        Me.GSENDERACNO.Caption = "SENDER A/C NO"
+        Me.GSENDERACNO.FieldName = "ACCNO"
+        Me.GSENDERACNO.Name = "GSENDERACNO"
+        Me.GSENDERACNO.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GSENDERACNO.OptionsColumn.ReadOnly = True
+        Me.GSENDERACNO.Visible = True
+        Me.GSENDERACNO.VisibleIndex = 1
+        Me.GSENDERACNO.Width = 100
+        '
+        'GBENIFICIARYCHQNO
+        '
+        Me.GBENIFICIARYCHQNO.Caption = "BENIFICIARY CHQ NO"
+        Me.GBENIFICIARYCHQNO.FieldName = "CHQNO"
+        Me.GBENIFICIARYCHQNO.Name = "GBENIFICIARYCHQNO"
+        Me.GBENIFICIARYCHQNO.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GBENIFICIARYCHQNO.OptionsColumn.ReadOnly = True
+        Me.GBENIFICIARYCHQNO.Visible = True
+        Me.GBENIFICIARYCHQNO.VisibleIndex = 2
+        Me.GBENIFICIARYCHQNO.Width = 150
+        '
+        'GBENIFICIARYCHQDATE
+        '
+        Me.GBENIFICIARYCHQDATE.Caption = "CHEQUE DATE"
+        Me.GBENIFICIARYCHQDATE.FieldName = "PAYDATE"
+        Me.GBENIFICIARYCHQDATE.Name = "GBENIFICIARYCHQDATE"
+        Me.GBENIFICIARYCHQDATE.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GBENIFICIARYCHQDATE.OptionsColumn.ReadOnly = True
+        Me.GBENIFICIARYCHQDATE.Visible = True
+        Me.GBENIFICIARYCHQDATE.VisibleIndex = 3
+        Me.GBENIFICIARYCHQDATE.Width = 80
+        '
+        'GBENIFICIARYACNO
+        '
+        Me.GBENIFICIARYACNO.Caption = "BENIFICIARY A/C NO"
+        Me.GBENIFICIARYACNO.FieldName = "ACNO"
+        Me.GBENIFICIARYACNO.Name = "GBENIFICIARYACNO"
+        Me.GBENIFICIARYACNO.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GBENIFICIARYACNO.OptionsColumn.ReadOnly = True
+        Me.GBENIFICIARYACNO.Visible = True
+        Me.GBENIFICIARYACNO.VisibleIndex = 4
+        Me.GBENIFICIARYACNO.Width = 150
+        '
+        'GIFSCCODE
+        '
+        Me.GIFSCCODE.Caption = "BENIFICIARY IFSC CODE"
+        Me.GIFSCCODE.FieldName = "IFSCCODE"
+        Me.GIFSCCODE.Name = "GIFSCCODE"
+        Me.GIFSCCODE.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GIFSCCODE.OptionsColumn.ReadOnly = True
+        Me.GIFSCCODE.Visible = True
+        Me.GIFSCCODE.VisibleIndex = 5
+        Me.GIFSCCODE.Width = 150
+        '
+        'GAMOUNT
+        '
+        Me.GAMOUNT.Caption = "AMOUNT"
+        Me.GAMOUNT.FieldName = "AMOUNT"
+        Me.GAMOUNT.Name = "GAMOUNT"
+        Me.GAMOUNT.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GAMOUNT.OptionsColumn.ReadOnly = True
+        Me.GAMOUNT.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)})
+        Me.GAMOUNT.Visible = True
+        Me.GAMOUNT.VisibleIndex = 6
+        Me.GAMOUNT.Width = 90
+        '
+        'GBENIFICIARYNAME
+        '
+        Me.GBENIFICIARYNAME.Caption = "BENIFICIARY NAME"
+        Me.GBENIFICIARYNAME.FieldName = "NAME"
+        Me.GBENIFICIARYNAME.Name = "GBENIFICIARYNAME"
+        Me.GBENIFICIARYNAME.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GBENIFICIARYNAME.OptionsColumn.ReadOnly = True
+        Me.GBENIFICIARYNAME.Visible = True
+        Me.GBENIFICIARYNAME.VisibleIndex = 7
+        Me.GBENIFICIARYNAME.Width = 200
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        '
+        'RepositoryItemCheckEdit2
+        '
+        Me.RepositoryItemCheckEdit2.AutoHeight = False
+        Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
+        '
+        'CMBTYPE
+        '
+        Me.CMBTYPE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CMBTYPE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CMBTYPE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMBTYPE.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CMBTYPE.FormattingEnabled = True
+        Me.CMBTYPE.Items.AddRange(New Object() {"", "EDUCATION", "MEDICAL"})
+        Me.CMBTYPE.Location = New System.Drawing.Point(54, 35)
+        Me.CMBTYPE.MaxDropDownItems = 14
+        Me.CMBTYPE.Name = "CMBTYPE"
+        Me.CMBTYPE.Size = New System.Drawing.Size(123, 22)
+        Me.CMBTYPE.TabIndex = 638
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(20, 39)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(31, 14)
+        Me.Label6.TabIndex = 639
+        Me.Label6.Text = "Type"
+        '
+        'cmdshowdetails
+        '
+        Me.cmdshowdetails.BackColor = System.Drawing.Color.Transparent
+        Me.cmdshowdetails.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.cmdshowdetails.FlatAppearance.BorderSize = 0
+        Me.cmdshowdetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmdshowdetails.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdshowdetails.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.cmdshowdetails.Image = Global.MNOWF.My.Resources.Resources.showdetails2
+        Me.cmdshowdetails.Location = New System.Drawing.Point(467, 34)
+        Me.cmdshowdetails.Name = "cmdshowdetails"
+        Me.cmdshowdetails.Size = New System.Drawing.Size(83, 25)
+        Me.cmdshowdetails.TabIndex = 636
+        Me.cmdshowdetails.UseVisualStyleBackColor = False
+        '
+        'chkdate
+        '
+        Me.chkdate.AutoSize = True
+        Me.chkdate.BackColor = System.Drawing.Color.Transparent
+        Me.chkdate.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkdate.Location = New System.Drawing.Point(183, 37)
+        Me.chkdate.Name = "chkdate"
+        Me.chkdate.Size = New System.Drawing.Size(52, 18)
+        Me.chkdate.TabIndex = 632
+        Me.chkdate.Text = "Date"
+        Me.chkdate.UseVisualStyleBackColor = False
+        '
+        'dtto
+        '
+        Me.dtto.CustomFormat = "dd/MM/yyyy"
+        Me.dtto.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtto.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtto.Location = New System.Drawing.Point(382, 35)
+        Me.dtto.Name = "dtto"
+        Me.dtto.Size = New System.Drawing.Size(79, 22)
+        Me.dtto.TabIndex = 635
+        '
+        'lblto
+        '
+        Me.lblto.AutoSize = True
+        Me.lblto.BackColor = System.Drawing.Color.Transparent
+        Me.lblto.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblto.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblto.Location = New System.Drawing.Point(358, 39)
+        Me.lblto.Name = "lblto"
+        Me.lblto.Size = New System.Drawing.Size(19, 14)
+        Me.lblto.TabIndex = 637
+        Me.lblto.Text = "To"
+        '
+        'dtfrom
+        '
+        Me.dtfrom.CustomFormat = "dd/MM/yyyy"
+        Me.dtfrom.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtfrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtfrom.Location = New System.Drawing.Point(273, 35)
+        Me.dtfrom.Name = "dtfrom"
+        Me.dtfrom.Size = New System.Drawing.Size(80, 22)
+        Me.dtfrom.TabIndex = 634
+        '
+        'lblfrom
+        '
+        Me.lblfrom.AutoSize = True
+        Me.lblfrom.BackColor = System.Drawing.Color.Transparent
+        Me.lblfrom.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblfrom.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblfrom.Location = New System.Drawing.Point(235, 39)
+        Me.lblfrom.Name = "lblfrom"
+        Me.lblfrom.Size = New System.Drawing.Size(34, 14)
+        Me.lblfrom.TabIndex = 633
+        Me.lblfrom.Text = "From"
         '
         'ToolStrip1
         '
@@ -528,7 +711,7 @@ Partial Class ClaimPaymentRegister
         'ClaimPaymentRegister
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1234, 741)
+        Me.ClientSize = New System.Drawing.Size(1234, 619)
         Me.Controls.Add(Me.BlendPanel1)
         Me.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.KeyPreview = True
@@ -538,10 +721,17 @@ Partial Class ClaimPaymentRegister
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.BlendPanel1.ResumeLayout(False)
         Me.BlendPanel1.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TBREPORT.ResumeLayout(False)
         CType(Me.gridbilldetails, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridbill, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CHKSETTLED, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CHKCLOSED, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TBFILTERS.ResumeLayout(False)
+        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -590,4 +780,19 @@ Partial Class ClaimPaymentRegister
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents PrintToolStripButton As ToolStripButton
     Friend WithEvents GVESSEL As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TBREPORT As TabPage
+    Friend WithEvents TBFILTERS As TabPage
+    Private WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
+    Private WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GBENIFICIARYNAME As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GBENIFICIARYACNO As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GBENIFICIARYCHQNO As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GBENIFICIARYCHQDATE As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents RepositoryItemCheckEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GSRNO As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GSENDERACNO As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GIFSCCODE As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GAMOUNT As DevExpress.XtraGrid.Columns.GridColumn
 End Class
