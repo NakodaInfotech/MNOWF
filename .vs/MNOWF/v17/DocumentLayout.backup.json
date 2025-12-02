@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{E9E77BA5-0932-4158-B5EB-C411F2C0114E}|MNOWF\\MNOWF.vbproj|d:\\git\\mnowf\\mnowf\\reports\\booking\\allotmentletter.rpt||{C0EF7560-990E-4D61-B970-65A6096B6866}",
       "RelativeMoniker": "D:0:0:{E9E77BA5-0932-4158-B5EB-C411F2C0114E}|MNOWF\\MNOWF.vbproj|solutionrelative:mnowf\\reports\\booking\\allotmentletter.rpt||{C0EF7560-990E-4D61-B970-65A6096B6866}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9E77BA5-0932-4158-B5EB-C411F2C0114E}|MNOWF\\MNOWF.vbproj|d:\\git\\mnowf\\mnowf\\common\\other forms\\login.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{E9E77BA5-0932-4158-B5EB-C411F2C0114E}|MNOWF\\MNOWF.vbproj|solutionrelative:mnowf\\common\\other forms\\login.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,11 +18,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Login.vb",
+              "DocumentMoniker": "D:\\GIT\\MNOWF\\MNOWF\\Common\\Other Forms\\Login.vb",
+              "RelativeDocumentMoniker": "MNOWF\\Common\\Other Forms\\Login.vb",
+              "ToolTip": "D:\\GIT\\MNOWF\\MNOWF\\Common\\Other Forms\\Login.vb",
+              "RelativeToolTip": "MNOWF\\Common\\Other Forms\\Login.vb",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-12-02T06:47:44.035Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
