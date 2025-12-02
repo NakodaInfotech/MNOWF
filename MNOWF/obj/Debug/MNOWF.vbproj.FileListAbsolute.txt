@@ -778,6 +778,8 @@ D:\GIT\MNOWF\MNOWF\bin\Debug\DevExpress.CodeParser.v25.1.dll
 D:\GIT\MNOWF\MNOWF\bin\Debug\DevExpress.PivotGrid.v25.1.Core.dll
 D:\GIT\MNOWF\MNOWF\bin\Debug\stdole.dll
 D:\GIT\MNOWF\MNOWF\bin\Debug\DevExpress.Xpo.v25.1.dll
+D:\GIT\MNOWF\MNOWF\bin\Debug\System.Memory.dll
+D:\GIT\MNOWF\MNOWF\bin\Debug\System.Numerics.Vectors.dll
 D:\GIT\MNOWF\MNOWF\bin\Debug\BL.pdb
 D:\GIT\MNOWF\MNOWF\bin\Debug\BL.xml
 D:\GIT\MNOWF\MNOWF\bin\Debug\DevExpress.Charts.v25.1.Core.xml
@@ -1005,4 +1007,3 @@ D:\GIT\MNOWF\MNOWF\obj\Debug\MNOWF.vbproj.Up2Date
 D:\GIT\MNOWF\MNOWF\obj\Debug\MNOWF.exe
 D:\GIT\MNOWF\MNOWF\obj\Debug\MNOWF.xml
 D:\GIT\MNOWF\MNOWF\obj\Debug\MNOWF.pdb
-D:\GIT\MNOWF\MNOWF\obj\Debug\MNOWF.exe.config
